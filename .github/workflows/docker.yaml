@@ -38,6 +38,8 @@ jobs:
           registry: ${{ env.DOCKER_REGISTRY }}
           username: ${{ github.repository_owner }}
           password: ${{ github.token }}
+      - name: Alter Package connection
+        run: echo "LABEL org.opencontainers.image.source=\"https://github.com/exolink/netbox-docker.git\"" >> Dockerfile
       - id: docker-build
         name: Build the image with './build.sh main'
         run: ./build.sh main
@@ -48,3 +50,4 @@ jobs:
         env:
           BUILDX_PLATFORM: linux/amd64,linux/arm64
           BUILDX_BUILDER_NAME: ${{ steps.buildx-setup.outputs.name }}
+          TAG: latest
