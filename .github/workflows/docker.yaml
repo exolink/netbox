@@ -41,9 +41,6 @@ jobs:
       - id: docker-build
         name: Build the image with './build.sh main'
         run: ./build.sh main
-        env:
-          BUILDX_PLATFORM: linux/amd64,linux/arm64
-          BUILDX_BUILDER_NAME: ${{ steps.buildx-setup.outputs.name }}
       - id: build-and-push
         name: Push the image
         run: ./build.sh --push
