@@ -1,0 +1,50 @@
+name: Docker
+
+on:
+  push:
+  workflow_dispatch:
+
+env:
+  DOCKER_REGISTRY: ghcr.io
+  DOCKER_ORG: ${{ github.repository_owner }}
+  GH_ACTION: enable
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  IMAGE_NAMES: ghcr.io/${{ github.repository }}
+  SRC_ORG: ${{ github.repository_owner }}
+
+jobs:
+  build-and-push-image:
+    name: Build Docker
+    runs-on: ubuntu-latest
+    if: ${{ github.ref_name == 'main' }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          repository: netbox-community/netbox-docker
+      - id: set-netbox-docker-version
+        name: Get Version of NetBox Docker
+        run: echo "version=$(cat VERSION)" >>"$GITHUB_OUTPUT"
+        shell: bash
+      - id: qemu-setup
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+      - id: buildx-setup
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      - id: docker-build
+        name: Build the image with './build.sh main'
+        run: ./build.sh main
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ env.DOCKER_REGISTRY }}
+          username: ${{ github.repository_owner }}
+          password: ${{ github.token }}
+      - id: build-and-push
+        name: Push the image
+        run: ${{ matrix.build_cmd }} --push
+        if: steps.docker-build.outputs.skipped != 'true'
+        env:
+          BUILDX_PLATFORM: linux/amd64,linux/arm64
+          BUILDX_BUILDER_NAME: ${{ steps.buildx-setup.outputs.name }}
