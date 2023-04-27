@@ -39,7 +39,9 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ github.token }}
       - name: Alter Package connection
-        run: echo "LABEL org.opencontainers.image.source=\"https://github.com/exolink/netbox-docker.git\"" >> Dockerfile
+        run: echo "LABEL org.opencontainers.image.source=\"https://github.com/exolink/netbox\"" >> Dockerfile
+      - name: Alter Package URL
+        run: echo "LABEL org.opencontainers.image.url=\"https://github.com/exolink/netbox\"" >> Dockerfile
       - id: docker-build
         name: Build the image with './build.sh main'
         run: ./build.sh main
