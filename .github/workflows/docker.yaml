@@ -43,7 +43,7 @@ jobs:
         run: ./build.sh main
       - id: build-and-push
         name: Push the image
-        run: ./build.sh --push
+        run: ./build.sh main --push
         if: steps.docker-build.outputs.skipped != 'true'
         env:
           BUILDX_PLATFORM: linux/amd64,linux/arm64
