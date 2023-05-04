@@ -533,6 +533,16 @@ class PowerPortTypeChoices(ChoiceSet):
 
 class PowerOutletTypeChoices(ChoiceSet):
 
+    # EV
+    TYPE_J1772_CABLE = 'j1772-cable'
+    TYPE_J1772_SOCKET = 'j1772-socket'
+    TYPE_MENNEKES_CABLE = 'mennekes-cable'
+    TYPE_MENNEKES_SOCKET = 'mennekes-socket'
+    TYPE_CHADEMO = 'chademo'
+    TYPE_CCS_TYPE_1 = 'ccs-type-1'
+    TYPE_CCS_TYPE_2 = 'ccs-type-2'
+    TYPE_TESLA_SUPERCHARGER = 'tesla-supercharger'
+    TYPE_GBT = 'gbt'
     # IEC 60320
     TYPE_IEC_C5 = 'iec-60320-c5'
     TYPE_IEC_C7 = 'iec-60320-c7'
@@ -635,6 +645,17 @@ class PowerOutletTypeChoices(ChoiceSet):
     TYPE_OTHER = 'other'
 
     CHOICES = (
+        ('EV', (
+            (TYPE_J1772_CABLE, 'Type1 cable (J1772)'),
+            (TYPE_J1772_SOCKET, 'Type1 socket (J1772)'),
+            (TYPE_MENNEKES_CABLE, 'Type2 cable (Mennekes)'),
+            (TYPE_MENNEKES_SOCKET, 'Type2 socket (Mennekes)'),
+            (TYPE_CHADEMO, 'CHAdeMO'),
+            (TYPE_CCS_TYPE_1, 'CCS Type 1'),
+            (TYPE_CCS_TYPE_2, 'CCS Type 2'),
+            (TYPE_TESLA_SUPERCHARGER, 'Tesla Supercharger (Non CCS)'),
+            (TYPE_GBT, 'GB/T'),
+        )),
         ('IEC 60320', (
             (TYPE_IEC_C5, 'C5'),
             (TYPE_IEC_C7, 'C7'),
