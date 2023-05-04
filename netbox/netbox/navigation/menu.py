@@ -21,19 +21,6 @@ ORGANIZATION_MENU = Menu(
             ),
         ),
         MenuGroup(
-            label=_('Racks'),
-            items=(
-                get_model_item('dcim', 'rack', _('Racks')),
-                get_model_item('dcim', 'rackrole', _('Rack Roles')),
-                get_model_item('dcim', 'rackreservation', _('Reservations')),
-                MenuItem(
-                    link='dcim:rack_elevation_list',
-                    link_text=_('Elevations'),
-                    permissions=['dcim.view_rack']
-                ),
-            ),
-        ),
-        MenuGroup(
             label=_('Tenancy'),
             items=(
                 get_model_item('tenancy', 'tenant', _('Tenants')),
@@ -61,9 +48,6 @@ DEVICES_MENU = Menu(
                 get_model_item('dcim', 'device', _('Devices')),
                 get_model_item('dcim', 'module', _('Modules')),
                 get_model_item('dcim', 'devicerole', _('Device Roles')),
-                get_model_item('dcim', 'platform', _('Platforms')),
-                get_model_item('dcim', 'virtualchassis', _('Virtual Chassis')),
-                get_model_item('dcim', 'virtualdevicecontext', _('Virtual Device Contexts')),
             ),
         ),
         MenuGroup(
@@ -80,8 +64,6 @@ DEVICES_MENU = Menu(
                 get_model_item('dcim', 'interface', _('Interfaces'), actions=['import']),
                 get_model_item('dcim', 'frontport', _('Front Ports'), actions=['import']),
                 get_model_item('dcim', 'rearport', _('Rear Ports'), actions=['import']),
-                get_model_item('dcim', 'consoleport', _('Console Ports'), actions=['import']),
-                get_model_item('dcim', 'consoleserverport', _('Console Server Ports'), actions=['import']),
                 get_model_item('dcim', 'powerport', _('Power Ports'), actions=['import']),
                 get_model_item('dcim', 'poweroutlet', _('Power Outlets'), actions=['import']),
                 get_model_item('dcim', 'modulebay', _('Module Bays'), actions=['import']),
@@ -192,42 +174,6 @@ IPAM_MENU = Menu(
     ),
 )
 
-OVERLAY_MENU = Menu(
-    label=_('Overlay'),
-    icon_class='mdi mdi-graph-outline',
-    groups=(
-        MenuGroup(
-            label='L2VPNs',
-            items=(
-                get_model_item('ipam', 'l2vpn', _('L2VPNs')),
-                get_model_item('ipam', 'l2vpntermination', _('Terminations')),
-            ),
-        ),
-    ),
-)
-
-VIRTUALIZATION_MENU = Menu(
-    label=_('Virtualization'),
-    icon_class='mdi mdi-monitor',
-    groups=(
-        MenuGroup(
-            label=_('Virtual Machines'),
-            items=(
-                get_model_item('virtualization', 'virtualmachine', _('Virtual Machines')),
-                get_model_item('virtualization', 'vminterface', _('Interfaces'), actions=['import']),
-            ),
-        ),
-        MenuGroup(
-            label=_('Clusters'),
-            items=(
-                get_model_item('virtualization', 'cluster', _('Clusters')),
-                get_model_item('virtualization', 'clustertype', _('Cluster Types')),
-                get_model_item('virtualization', 'clustergroup', _('Cluster Groups')),
-            ),
-        ),
-    ),
-)
-
 CIRCUITS_MENU = Menu(
     label=_('Circuits'),
     icon_class='mdi mdi-transit-connection-variant',
@@ -321,8 +267,6 @@ MENUS = [
     CONNECTIONS_MENU,
     WIRELESS_MENU,
     IPAM_MENU,
-    OVERLAY_MENU,
-    VIRTUALIZATION_MENU,
     CIRCUITS_MENU,
     POWER_MENU,
     OTHER_MENU,
