@@ -22,7 +22,7 @@
 <div class="row">
 	<div class="col col-md-6">
     <div class="card">
-      <h5 class="card-header">Site</h5>
+      <h5 class="card-header">Standort</h5>
       <div class="card-body">
         <table class="table table-hover attr-table">
           <tr>
@@ -77,7 +77,7 @@
             <td>
               {% if object.time_zone %}
                 {{ object.time_zone }} (UTC {{ object.time_zone|tzoffset }})<br />
-                <small class="text-muted">Site time: {% timezone object.time_zone %}{% annotated_now %}{% endtimezone %}</small>
+                <small class="text-muted">Zeit am Standort: {% timezone object.time_zone %}{% annotated_now %}{% endtimezone %}</small>
               {% else %}
                 {{ ''|placeholder }}
               {% endif %}
@@ -129,14 +129,14 @@
       {% include 'inc/panels/related_objects.html' with filter_name='site_id' %}
       {% include 'inc/panels/contacts.html' %}
       <div class="card">
-        <h5 class="card-header">Locations</h5>
+        <h5 class="card-header">Standort-Unterteilungen</h5>
         <div class='card-body'>
           {% if locations %}
             <table class="table table-hover">
               <tr>
-                <th>Location</th>
+                <th>Standort-Unterteilung</th>
                 <th>Racks</th>
-                <th>Devices</th>
+                <th>Ladesäulen</th>
                 <th></th>
               </tr>
               {% for location in locations %}
